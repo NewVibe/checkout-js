@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.235.1](https://github.com/bigcommerce/checkout-js/compare/v1.235.0...v1.235.1) (2022-07-22)
+
+
+### Bug Fixes
+
+* **checkout:** ADYEN-0000 fixed payment provider title css ([f760a14](https://github.com/bigcommerce/checkout-js/commit/f760a14db5e8a1ae28e91b31bcd4c39e04fd32dd))
+
+## [1.235.0](https://github.com/bigcommerce/checkout-js/compare/v1.234.1...v1.235.0) (2022-07-20)
+
+
+### Features
+
+* **checkout:** CHECKOUT-6269 Create payment-integration package ([#920](https://github.com/bigcommerce/checkout-js/issues/920)) ([989669f](https://github.com/bigcommerce/checkout-js/commit/989669f50198028d6cea1aae34d9b854b6842969))
+
+### [1.234.1](https://github.com/bigcommerce/checkout-js/compare/v1.234.0...v1.234.1) (2022-07-20)
+
+## [1.234.0](https://github.com/bigcommerce/checkout-js/compare/v1.233.1...v1.234.0) (2022-07-20)
+
+
+### Features
+
+* **checkout:** CHECKOUT-0000 Update e2e tests local env entry point ([#933](https://github.com/bigcommerce/checkout-js/issues/933)) ([df53c97](https://github.com/bigcommerce/checkout-js/commit/df53c976b089aac0a96dea0abb0d9ca7de1210de))
+
+### [1.233.1](https://github.com/bigcommerce/checkout-js/compare/v1.233.0...v1.233.1) (2022-07-20)
+
+
+### Bug Fixes
+
+* **checkout:** CHECKOUT-0000 Update e2e tests for buy-now cart project ([#927](https://github.com/bigcommerce/checkout-js/issues/927)) ([72859bc](https://github.com/bigcommerce/checkout-js/commit/72859bc980c9d2b3dcdbbf5cd9b368ca276eadfa))
+
 ## [1.233.0](https://github.com/bigcommerce/checkout-js/compare/v1.232.6...v1.233.0) (2022-07-18)
 
 
