@@ -2,16 +2,4 @@
 // LAYOUT
 // =============================================================================
 
-@import "brands/bestop";
-
-@import "brands/softopper";
-
-@import "brands/tuffy";
-
-@import "brands/baja-designs";
-
-@import "brands/prpseats.scss";
-
-@import "brands/offroad-source";
-
 @import "checkout/checkout";

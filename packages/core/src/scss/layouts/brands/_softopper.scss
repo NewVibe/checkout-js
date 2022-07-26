@@ -1,0 +1,178 @@
+
+@font-face {
+    font-family: 'Erbaum-Bold';
+    src: url('https://softopper.com/wp-content/themes/softopper/fonts/Erbaum-Bold/font.woff2') format('woff2'), url('https://softopper.com/wp-content/themes/softopper/fonts/Erbaum-Bold/font.woff') format('woff');
+}
+
+$red: #ed1d24;
+$dark-red: #bd171c;
+
+.softopper {
+    font-size: 14px;
+
+    .customerEmail-body {
+        width: 100%;
+    }
+
+    .customerEmail-action {
+        padding-left: 0;
+        width: 100%;
+
+        .customerEmail-button {
+            max-width: 308px;
+        }
+    }
+
+    a {
+        color: $red;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 400;
+
+        &:hover {
+            color: $dark-red;
+        }
+
+        &.cart-header-link {
+            color: #333;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        &#checkout-customer-login {
+            text-transform: uppercase;
+        }
+    }
+
+    .optimizedCheckout-step svg {
+        fill: $red;
+    }
+
+    .optimizedCheckout-headingPrimary {
+        font-family: 'Erbaum-Bold', sans-serif;
+        font-size: 20px;
+        font-weight: normal;
+        text-transform: uppercase;
+    }
+
+    .optimizedCheckout-contentPrimary {
+        font-family: 'Roboto', sans-serif;
+        font-weight: 400;
+
+        h5 {
+            font-weight: 700;
+        }
+    }
+
+    .optimizedCheckout-step {
+        background-color: #fff;
+        border: 2px solid #333;
+        font-weight: bold;
+        height: 38px;
+        width: 38px;
+
+        &::before {
+            color: #333;
+            font-family: 'Erbaum-Bold', sans-serif;
+            font-size: 24px;
+            font-weight: normal;
+            height: 34px;
+            line-height: 34px;
+            width: 34px;
+        }
+    }
+
+    .stepHeader-counter--complete {
+        background-color: #fff;
+        border: 2px solid $red;
+
+        &::before {
+            height: 0;
+            line-height: 0;
+            width: 0;
+        }
+    }
+
+    .optimizedCheckout-headingSecondary {
+        font-family: 'Erbaum-Bold', sans-serif !important;
+        font-size: 18px;
+        font-weight: normal;
+        text-transform: uppercase;
+    }
+
+    .optimizedCheckout-buttonPrimary {
+        background-color: $red;
+        border-color: $red;
+        color: #fff;
+        font-family: 'Erbaum-Bold', sans-serif !important;
+        font-size: 19px;
+        font-weight: normal;
+    }
+
+    .optimizedCheckout-buttonSecondary {
+        background-color: $red;
+        border-color: $red;
+        color: #fff;
+        font-family: 'Erbaum-Bold', sans-serif !important;
+        font-size: 18px;
+        font-weight: normal;
+    }
+
+    .form-checkbox + .form-label::after {
+        color: $red;
+    }
+
+    .optimizedCheckout-form-checklist-checkbox:checked ~ .form-label::before {
+        border-color: $red;
+    }
+
+    .optimizedCheckout-form-checklist-checkbox:checked ~ .form-label::after {
+        background-color: $red;
+    }
+
+    .optimizedCheckout-form-checkbox:checked + .optimizedCheckout-form-label::before,
+    .optimizedCheckout-form-radio:checked + .optimizedCheckout-form-label::before {
+        background-color: $red;
+        border-color: $red;
+    }
+
+    .cart {
+        border-color: #979797;
+        border-radius: 5px;
+
+        .product-figure {
+            border: 1px solid #979797;
+            border-radius: 5px;
+            box-shadow: none;
+            height: 117px;
+            margin-right: 12px;
+            max-height: 117px;
+            overflow: hidden;
+            padding-right: 0;
+            text-align: center;
+            width: 117px;
+
+            img {
+                height: auto;
+                max-height: 100%;
+                max-width: 100%;
+                width: auto;
+            }
+        }
+
+        .product-actions {
+            width: 100%;
+        }
+
+        .product-body {
+            width: calc(100% - 132px);
+        }
+
+        .product-price {
+            font-size: 16px;
+        }
+
+        .brandLogo {
+            height: 19px;
+        }
+    }
+}

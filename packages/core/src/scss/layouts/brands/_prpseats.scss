@@ -1,0 +1,257 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
+
+$blue: #0072bc;
+$black: #020910;
+
+.prpseats {
+    font-family: 'Roboto', sans-serif !important;
+    font-size: 14px;
+
+    .customerEmail-body {
+        width: 100%;
+    }
+
+    .customerEmail-action {
+        padding-left: 0;
+        width: 100%;
+
+        .customerEmail-button {
+            max-width: 308px;
+        }
+    }
+
+    #applyRedeemableButton {
+        background-color: $blue;
+        border-color: $blue;
+        color: #fff;
+        font-size: 18px;
+        font-style: italic;
+        font-weight: 900;
+        line-height: 1;
+        padding: 15px 2.25rem;
+
+        &:hover {
+            background-color: #fff;
+            color: $blue;
+        }
+    }
+
+    .cart-header {
+        background-color: $blue;
+
+        h3.optimizedCheckout-headingSecondary {
+            color: #fff;
+        }
+    }
+
+    .brandLogo {
+        .Tuffy {
+            max-width: 54px;
+        }
+    }
+
+    a {
+        color: $blue;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 400;
+        text-decoration: underline;
+
+        &:hover {
+            color: #000;
+        }
+
+        &.cart-header-link {
+            color: #fff;
+            font-size: 14px;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+
+        &#checkout-customer-login {
+            text-transform: uppercase;
+        }
+
+        &.stepHeader {
+            text-decoration: none;
+        }
+    }
+
+    .optimizedCheckout-step svg {
+        fill: #fff;
+    }
+
+    .optimizedCheckout-headingPrimary {
+        color: $black;
+        font-size: 20px;
+        font-style: italic;
+        font-weight: 900;
+        letter-spacing: 0.15px;
+        text-transform: uppercase;
+    }
+
+    .optimizedCheckout-contentPrimary {
+        color: $black;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 400;
+
+        h5 {
+            font-weight: 700;
+        }
+    }
+
+    .optimizedCheckout-step {
+        background-color: #fff;
+        border: 3px solid $black;
+        font-size: 24px;
+        font-style: italic;
+        font-weight: 900;
+        height: 39px;
+        width: 39px;
+
+        &::before {
+            color: $black;
+            font-size: 24px;
+            height: 33px;
+            line-height: 33px;
+            width: 33px;
+        }
+    }
+
+    .stepHeader-counter--complete {
+        background-color: $blue;
+        border: 2px solid $blue;
+        color: #fff;
+        height: 43px;
+        line-height: 43px;
+        width: 43px;
+
+        &::before {
+            height: 0;
+            line-height: 0;
+            width: 0;
+        }
+    }
+
+    .optimizedCheckout-headingSecondary {
+        color: $black;
+        font-size: 18px;
+        font-style: italic;
+        font-weight: 900;
+        text-transform: uppercase;
+    }
+
+    .optimizedCheckout-buttonPrimary {
+        background-color: $blue;
+        border-color: $blue;
+        border-radius: 0;
+        color: #fff;
+        font-size: 18px;
+        font-style: italic;
+        font-weight: 900;
+    }
+
+    .optimizedCheckout-buttonSecondary {
+        background-color: #fff;
+        border-color: $black;
+        border-radius: 0;
+        color: $black;
+        font-size: 15px;
+        font-style: italic;
+        font-weight: 900;
+        padding: 8px 15px;
+        text-transform: uppercase;
+    }
+
+    .optimizedCheckout-form-checkbox:checked + .optimizedCheckout-form-label::before,
+    .optimizedCheckout-form-radio:checked + .optimizedCheckout-form-label::before {
+        background-color: $black;
+        border-color: $black;
+    }
+
+    .optimizedCheckout-form-checklist-checkbox:checked ~ .form-label::before {
+        border-color: $black;
+    }
+
+    .optimizedCheckout-form-checklist-checkbox:checked ~ .form-label::after {
+        background-color: $black;
+    }
+
+    .optimizedCheckout-form-input,
+    .optimizedCheckout-form-select {
+        border-radius: 0;
+    }
+
+    .cart {
+        border-color: #979797;
+        border-radius: 0;
+
+        .product-figure {
+            border: 1px solid #979797;
+            border-radius: 0;
+            box-shadow: none;
+            height: 117px;
+            margin-right: 12px;
+            max-height: 117px;
+            overflow: hidden;
+            padding-right: 0;
+            text-align: center;
+            width: 117px;
+
+            img {
+                height: auto;
+                max-height: 100%;
+                max-width: 100%;
+                width: auto;
+            }
+        }
+
+        .product-body {
+            width: calc(100% - 132px);
+        }
+
+        .product-price {
+            font-size: 16px;
+        }
+    }
+
+    .cart-modal-body {
+        padding-left: 0;
+        padding-right: 0;
+
+        .product-figure {
+            border: 1px solid #979797;
+            border-radius: 5px;
+            box-shadow: none;
+            height: 117px;
+            margin-right: 12px;
+            max-height: 117px;
+            overflow: hidden;
+            padding-right: 0;
+            text-align: center;
+            width: 117px;
+
+            img {
+                height: auto;
+                max-height: 100%;
+                max-width: 100%;
+                width: auto;
+            }
+        }
+
+        .product-body {
+            order: unset;
+            width: calc(100% - 132px);
+        }
+
+        .product-price {
+            font-size: 16px;
+        }
+    }
+
+    .checkoutHeaderNew__logo {
+        img {
+            max-width: 133px;
+        }
+    }
+}
