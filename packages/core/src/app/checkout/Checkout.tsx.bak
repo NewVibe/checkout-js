@@ -24,8 +24,6 @@ import CheckoutStepStatus from './CheckoutStepStatus';
 import CheckoutStepType from './CheckoutStepType';
 import CheckoutSupport from './CheckoutSupport';
 
-import CheckoutHeader from './CheckoutHeader';
-
 const Billing = lazy(() => retry(() => import(
     /* webpackChunkName: "billing" */
     '../billing/Billing'
@@ -55,9 +53,6 @@ const Shipping = lazy(() => retry(() => import(
     /* webpackChunkName: "shipping" */
     '../shipping/Shipping'
 )));
-
-let checkout_branded: boolean = false;
-let site_info:string[] = ['',''];
 
 export interface CheckoutProps {
     checkoutId: string;
@@ -145,47 +140,6 @@ class Checkout extends Component<CheckoutProps & WithCheckoutProps & WithLanguag
                     ] as any, // FIXME: Currently the enum is not exported so it can't be used here.
                 },
             });
-
-
-            if( this.props !== undefined && this.props.cart !== undefined && this.props.cart.id !== undefined ){
-                let cart_id = this.props.cart.id;
-                let cache_breaker = Math.floor( Math.random() * 1000 ).toString();
-
-                fetch('https://bpagutility.wpengine.com/wp-content/plugins/cart-repo/get-info.php?cart_id='+cart_id+'&rand='+cache_breaker)
-                .then(response => response.text())
-                .then(brand => {
-                    console.log(brand);
-                    site_info = this.get_site_url_and_logo(this.props.cart, brand);
-                    this.setState({
-                            
-                    })
-                })
-                .catch(err => {
-                    console.log(err);
-                    if( this.props !== undefined && this.props.cart !== undefined && this.props.cart.lineItems !== undefined && this.props.cart.lineItems.physicalItems !== undefined ){
-                        let line_items = this.props.cart.lineItems.physicalItems;
-                        console.log('error');
-                        console.log(line_items);
-                        let brand = '';
-                        if( line_items.length > 0 ){
-                            let last_item = line_items[line_items.length - 1];
-                            brand = last_item.brand;
-                        } else {
-                            if( this.props.cart.lineItems.digitalItems !== undefined ){
-                                let digital_line_items = this.props.cart.lineItems.digitalItems;
-                                let last_digital_item = digital_line_items[digital_line_items.length - 1];
-                                brand = last_digital_item.brand;
-                            }
-                        }
-                        site_info = this.get_site_url_and_logo(cart, brand);
-                        this.setState({
-                            
-                          })
-                    }
-                });
-            }
-
-
             const { links: { siteLink = '' } = {} } = data.getConfig() || {};
             const errorFlashMessages = data.getFlashMessages('error') || [];
 
@@ -288,11 +242,6 @@ class Checkout extends Component<CheckoutProps & WithCheckoutProps & WithLanguag
                 hideContentWhenLoading
                 isLoading={ isRedirecting }
             >
-
-                { this.renderCheckoutHeader( this.props.cart ) }
-                { this.displayCheckoutHeader() }
-                { this.displayCheckout() }
-                
                 <div className="layout-main">
                     <LoadingNotification isLoading={ isPending } />
 
@@ -309,185 +258,8 @@ class Checkout extends Component<CheckoutProps & WithCheckoutProps & WithLanguag
                 </div>
 
                 { this.renderCartSummary() }
-                { this.displayCheckoutHeader() }
-                
-
             </LoadingOverlay>
         );
-    }
-
-    private displayCheckoutHeader(){       
-            const hiddenContainer = document.querySelector('.hiddenContainer');
-            const checkoutHeader = document.querySelector('.checkoutHeader');
-            const checkoutHeader_content = document.querySelector('.checkoutHeader-content');
-            const header_ready_interval = setInterval(() => {
-                if(  hiddenContainer && checkoutHeader && checkoutHeader_content ){
-                    clearInterval( header_ready_interval );
-                    console.log( 'display header' );
-                    const content = hiddenContainer.innerHTML;
-                    if( content && content !== '' ){
-                        checkoutHeader_content.innerHTML = content;
-                        hiddenContainer.innerHTML = '';
-                        checkoutHeader.classList.add('active');
-                    }
-                }
-            }, 500);    
-    }
-
-    private displayCheckout(){       
-        const checkout_app = document.getElementById('checkout-app');
-        if( checkout_app ){
-            checkout_app.style.opacity = '0';
-            checkout_app.style.display = 'block';
-            (function fade() {
-                var val = parseFloat(checkout_app.style.opacity);
-                if (!((val += .1) > 1)) {
-                    checkout_app.style.opacity = val.toString();
-                    requestAnimationFrame(fade);
-                }
-            })();
-        }
-    }
-
-    private updateCartHeaderLink( link: string ){
-        if( ! checkout_branded ){
-            const cart_anchor = document.querySelector('.cart-header .cart-header-link');
-            const modal_cart_anchor = document.querySelector('.cart-modal-header .cart-modal-link');
-            if( cart_anchor ){
-                cart_anchor.setAttribute('href', link);
-            }
-            if( modal_cart_anchor ){
-                modal_cart_anchor.setAttribute('href', link);
-            }
-        }
-    }
-
-    private renderCheckoutHeader(cart?: Cart): ReactNode {
-        if( cart !== undefined && site_info[0] != '' && ! checkout_branded ){
-            checkout_branded = true;
-            console.log(site_info[0]+' || '+site_info[1]);
-            return (
-                <CheckoutHeader siteUrl={site_info[0]} logoUrl={site_info[1]} />
-            )
-
-            /*let cart_id = cart.id;
-
-            let times_up: boolean = false;
-            let brand = '';
-
-            let checkout = this;
-
-            fetch('https://bpagutility.wpengine.com/wp-content/plugins/cart-repo/get-info.php?cart_id='+cart_id)
-                .then(response => response.text())
-                .then(brand => {
-                    console.log('brand: '+brand);
-                    if( ! times_up ){
-                        checkout_branded = true;
-                        site_info = checkout.get_site_url_and_logo(cart, brand);
-                        if( site_info && site_info !== undefined ){
-                            console.log('site info: ');
-                            console.log(site_info);
-                            return (
-                                <CheckoutHeader siteUrl={site_info[0]} logoUrl={site_info[1]} />
-                            )
-                        }
-                    }
-                });
-
-            setTimeout( function(){
-                console.log('times up!');
-                times_up = true;
-
-                if( ! checkout_branded ){
-                    let line_items = cart.lineItems.physicalItems;
-                    if( line_items.length > 0 ){
-                        let last_item = line_items[line_items.length - 1];
-                        brand = last_item.brand;
-                    } else {
-                        let digital_line_items = cart.lineItems.digitalItems;
-                        let last_digital_item = digital_line_items[digital_line_items.length - 1];
-                        brand = last_digital_item.brand;
-                    }
-                    site_info = checkout.get_site_url_and_logo(cart, brand);
-                    if( site_info && site_info !== undefined ){
-                        console.log('site info: ');
-                        console.log(site_info);
-                        return (
-                            <CheckoutHeader siteUrl={site_info[0]} logoUrl={site_info[1]} />
-                        )
-                    }
-                }
-            }, 5000);
-
-            
-            if( times_up && ! checkout_branded ){
-                return (
-                    <CheckoutHeader siteUrl={'https://bestop.com'} logoUrl={'https://www.bestop.com/wp-content/themes/bestop/images/bestop-logo.svg'} />
-                )
-            }*/
-        }
-    }
-
-    private get_site_url_and_logo(cart?: Cart, brand?: string): string[] {
-        let site = '';
-        let siteUrl = '';
-        let logoUrl = '';
-        if( cart !== undefined && brand !== undefined ){
-            console.log('brand:'+brand);
-            switch( brand ){
-                case 'Softopper': case 'softopper': case 'softopperstg':
-                    site = 'softopper';
-                    siteUrl = 'https://softopper.com';
-                    logoUrl = 'https://softopper.com/wp-content/themes/softopper/images/logo-softopper.svg';
-                    break;
-                case 'Bestop': case 'bestop': case 'bestopstaging':
-                    site = 'bestop';
-                    siteUrl = 'https://bestop.com';
-                    logoUrl = 'https://www.bestop.com/wp-content/themes/bestop/images/bestop-logo.svg';
-                    break;
-                case 'Tuffy Security Products': case 'tuffy': case 'tuffystg':
-                    site = 'tuffy';
-                    siteUrl = 'https://tuffyproducts.com';
-                    logoUrl = 'https://tuffyproducts.com/wp-content/themes/tuffy/images/tuffy-logo.svg';
-                    break;
-                case 'Baja Designs': case 'bajadesigns': case 'bajadesignsdev': 
-                    site = 'baja';
-                    siteUrl = 'https://www.bajadesigns.com';
-                    logoUrl = 'https://www.bajadesigns.com/wp-content/themes/bajadesigns/images/bajadesigns-logo-white.svg';
-                    break;
-                case 'PRP Seats': case 'prpseats': case 'prp-seats': case 'prpseatsdev':
-                    site = 'prpseats';
-                    siteUrl = 'https://new.prpseats.com';
-                    logoUrl = 'https://prpseats.wpengine.com/wp-content/themes/prpseats/images/prp-logo.svg';
-                    break;
-                case 'offroadsourceDEV': case 'offroadsource': 
-                    site = 'offroadsource';
-                    siteUrl = 'https://offroadsource.com/';
-                    logoUrl = 'https://offroadsource.com/wp-content/themes/bronco/assets/images/offroad-source-logo.svg';
-                    break;
-                default:
-                    site = 'bestop';
-                    siteUrl = 'https://bestop.com';
-                    logoUrl = 'https://www.bestop.com/wp-content/themes/bestop/images/bestop-logo.svg';
-            }
-
-            const link = siteUrl+'/cart/';
-            this.updateCartHeaderLink(link);
-            const header_content_container = document.querySelector('header.checkoutHeader');
-            const checkout_content_container = document.getElementById('checkout-app');
-            const body = document.querySelector('body');
-            if( header_content_container ){
-                header_content_container.classList.add(site);
-            }
-            if( checkout_content_container ){
-                checkout_content_container.classList.add(site);
-            } 
-            if( body ){
-                body.classList.add(site);
-            } 
-            
-        }
-        return [siteUrl, logoUrl];
     }
 
     private renderStep(step: CheckoutStepStatus): ReactNode {

@@ -513,7 +513,6 @@ export function mapToPaymentProps({
 
     let selectedPaymentMethod;
     let filteredMethods;
-    let dealerOnlyPaymentMethods = ['moneyorder', 'bankdeposit'];
 
     filteredMethods = methods.filter((method: PaymentMethod) => {
         if (method.id === PaymentMethodId.Bolt && method.initializationData) {
@@ -522,12 +521,6 @@ export function mapToPaymentProps({
 
         return true;
     });
-
-    if (!customer.customerGroup || !customer.customerGroup.id || !customer.customerGroup.name) {
-        filteredMethods = methods.filter((method: PaymentMethod) => {
-            return dealerOnlyPaymentMethods.indexOf(method.id) === -1;
-        });
-    } 
 
     if (consignments && consignments.length > 1) {
         const multiShippingIncompatibleMethodIds: string[] = [
